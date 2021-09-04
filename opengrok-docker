@@ -47,7 +47,7 @@ case "$1" in
 	wget -O - http://localhost:5000/reindex
 	;;
     *)
-	echo "Usage: $(basename $0) {pull|start|stop|delete|logs|reindex}"
+	echo "Usage: $(basename $0) {pull|create|start|stop|delete|logs|reindex}"
 	;;
 esac
 
