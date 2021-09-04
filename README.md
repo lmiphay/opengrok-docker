@@ -14,6 +14,8 @@ Variables at the start of the `opengrok-docker` script allow these settings to b
 ## Quickstart
 
 ```
+$ opengrok-docker settings
+...
 $ opengrok-docker pull
 $ opengrok-docker create
 $ opengrok-docker start
