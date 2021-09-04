@@ -1,0 +1,54 @@
+#!/bin/bash
+
+opengrok_version=1.7.17
+
+opengrok_sync=0
+opengrok_nomirror=1
+opengrok_check_index=1
+
+opengrok_src=/var/opengrok/src/
+opengrok_etc=/var/opengrok/etc-docker/
+opengrok_data=/var/opengrok/data/
+
+opengrok_host_reindex_port=5000
+opengrok_host_app_port=8080
+
+case "$1" in
+    pull)
+	docker pull "opengrok/docker:${opengrok_version}"
+	;;
+    create)
+	docker create \
+	       --name opengrok \
+	       -p "${opengrok_host_app_port}:8080/tcp" \
+	       -p "${opengrok_host_reindex_port}:5000/tcp" \
+	       -e CHECK_INDEX="${opengrok_check_index}" \
+	       -e NOMIRROR="${opengrok_nomirror}" \
+	       -e SYNC_PERIOD_MINUTES="${opengrok_sync}" \
+	       -v "${opengrok_src}:/opengrok/src/" \
+	       -v "${opengrok_etc}:/opengrok/etc/" \
+	       -v "${opengrok_data}:/opengrok/data/" \
+	       "opengrok/docker:${opengrok_version}"
+	;;
+    start|run)
+	[ ! -f "${opengrok_etc}/mirror.yml" ] && touch "${opengrok_etc}/mirror.yml"
+	docker start opengrok
+	;;
+    stop)
+	docker stop opengrok
+	;;
+    delete|rm)
+	docker rm opengrok
+	;;
+    logs)
+	docker logs -f opengrok
+	;;
+    reindex)
+	wget -O - http://localhost:5000/reindex
+	;;
+    *)
+	echo "Usage: $(basename $0) {pull|start|stop|delete|logs|reindex}"
+	;;
+esac
+
+exit 0
