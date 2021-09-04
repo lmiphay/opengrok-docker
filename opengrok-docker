@@ -1,17 +1,19 @@
 #!/bin/bash
 
-opengrok_version=1.7.17
+opengrok_version=${opengrok_version:-1.7.17}
 
-opengrok_sync=0
-opengrok_nomirror=1
-opengrok_check_index=1
+opengrok_sync=${opengrok_sync:-0}
+opengrok_nomirror=${opengrok_nomirror:-1}
+opengrok_check_index=${opengrok_check_index:-1}
 
-opengrok_src=/var/opengrok/src/
-opengrok_etc=/var/opengrok/etc-docker/
-opengrok_data=/var/opengrok/data/
+opengrok_src=${opengrok_src:-/var/opengrok/src/}
+opengrok_etc=${opengrok_etc:-/var/opengrok/etc-docker/}
+opengrok_data=${opengrok_data:-/var/opengrok/data/}
 
-opengrok_host_reindex_port=5000
-opengrok_host_app_port=8080
+opengrok_host_reindex_port=${opengrok_host_reindex_port:-5000}
+opengrok_host_app_port=${opengrok_host_app_port:-8080}
+
+if [ -n "$OPENGROK_DOCKER_CONFIG" ] ; then source "$OPENGROK_DOCKER_CONFIG" ; fi
 
 case "$1" in
     pull)
@@ -44,10 +46,13 @@ case "$1" in
 	docker logs -f opengrok
 	;;
     reindex)
-	wget -O - http://localhost:5000/reindex
+	wget -O - http://localhost:${opengrok_host_reindex_port}/reindex
+	;;
+    settings)
+	set | egrep '^opengrok_' | sort
 	;;
     *)
-	echo "Usage: $(basename $0) {pull|create|start|stop|delete|logs|reindex}"
+	echo "Usage: $(basename $0) {pull|create|start|stop|delete|logs|reindex|settings}"
 	;;
 esac
 
