@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenGrok Service
+After=network-online.target
+Description=OpenGrok Docker Appliance Service
+Documentation=man:opengrok-docker(8)
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+Environment=OPENGROK_DOCKER_CONFIG=/etc/opengrok.conf
+WorkingDirectory=/var/tmp
+ExecStart=/usr/bin/opengrok-docker start
+ExecStop=/usr/bin/opengrok-docker stop
+
+[Install]
+WantedBy=multi-user.target
