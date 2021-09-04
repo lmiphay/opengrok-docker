@@ -15,7 +15,7 @@ opengrok_host_app_port=${opengrok_host_app_port:-8080}
 
 OPENGROK_DOCKER_CONFIG=${OPENGROK_DOCKER_CONFIG:-/etc/opengrok.conf}
 
-if [ -n "$OPENGROK_DOCKER_CONFIG" ] ; then source "$OPENGROK_DOCKER_CONFIG" ; fi
+if [ -n "${OPENGROK_DOCKER_CONFIG}" -a -f "${OPENGROK_DOCKER_CONFIG}" ] ; then source "${OPENGROK_DOCKER_CONFIG}" ; fi
 
 case "$1" in
     pull)
