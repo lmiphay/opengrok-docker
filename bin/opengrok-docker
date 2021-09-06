@@ -7,7 +7,7 @@ opengrok_nomirror=${opengrok_nomirror:-1}
 opengrok_check_index=${opengrok_check_index:-1}
 
 opengrok_src=${opengrok_src:-/var/opengrok/src/}
-opengrok_etc=${opengrok_etc:-/var/opengrok/etc-docker/}
+opengrok_etc=${opengrok_etc:-/var/opengrok/etc/}
 opengrok_data=${opengrok_data:-/var/opengrok/data/}
 
 opengrok_host_reindex_port=${opengrok_host_reindex_port:-5000}
