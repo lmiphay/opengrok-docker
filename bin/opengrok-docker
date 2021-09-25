@@ -1,6 +1,6 @@
 #!/bin/bash
 
-opengrok_version=${opengrok_version:-1.7.17}
+opengrok_version=${opengrok_version:-1.7.19}
 
 opengrok_sync=${opengrok_sync:-0}
 opengrok_nomirror=${opengrok_nomirror:-1}
