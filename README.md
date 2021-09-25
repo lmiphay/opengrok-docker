@@ -26,3 +26,9 @@ $ opengrok-docker stop
 ...
 $ opengrok-docker delete
 ```
+
+## References
+
+1. https://github.com/oracle/opengrok/tree/master/docker
+2. https://github.com/oracle/opengrok/wiki/Repository-synchronization
+3. https://github.com/oracle/opengrok/releases
