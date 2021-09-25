@@ -27,6 +27,14 @@ $ opengrok-docker stop
 $ opengrok-docker delete
 ```
 
+## Upgrade
+
+1. opengrok-docker stop
+2. opengrok-docker pull
+3. docker rename opengrok opengrok-1.7.17
+4. opengrok-docker create
+5. opengrok-docker start
+
 ## References
 
 1. https://github.com/oracle/opengrok/tree/master/docker
