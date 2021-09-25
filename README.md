@@ -32,3 +32,4 @@ $ opengrok-docker delete
 1. https://github.com/oracle/opengrok/tree/master/docker
 2. https://github.com/oracle/opengrok/wiki/Repository-synchronization
 3. https://github.com/oracle/opengrok/releases
+4. https://github.com/lmiphay/opengrok-docker/releases
