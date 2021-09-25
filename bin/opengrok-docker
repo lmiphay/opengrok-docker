@@ -48,7 +48,8 @@ case "$1" in
 	docker logs -f opengrok
 	;;
     reindex)
-	wget -O - http://localhost:${opengrok_host_reindex_port}/reindex
+	curl http://localhost:${opengrok_host_reindex_port}/reindex
+	echo ""
 	;;
     settings)
 	set | egrep '^opengrok_' | sort
