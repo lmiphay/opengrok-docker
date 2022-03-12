@@ -34,7 +34,7 @@ After that the container can be started and stopped as required.
 
 1. opengrok-docker stop
 2. opengrok-docker pull
-3. docker rename opengrok opengrok-1.7.17
+3. docker rename opengrok opengrok-1.7.17 # renames the old container
 4. opengrok-docker create
 5. opengrok-docker start
 
