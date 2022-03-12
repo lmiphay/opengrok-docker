@@ -17,6 +17,20 @@ OPENGROK_DOCKER_CONFIG=${OPENGROK_DOCKER_CONFIG:-/etc/opengrok.conf}
 
 if [ -n "${OPENGROK_DOCKER_CONFIG}" -a -f "${OPENGROK_DOCKER_CONFIG}" ] ; then source "${OPENGROK_DOCKER_CONFIG}" ; fi
 
+waitfordockerd()
+{
+    for (( count=1; count<=15; count++ )) ; do
+	if docker version >/dev/null 2>&1 ; then
+	    return
+	else
+	    echo "waiting for docker daemon to start"
+	    sleep 1
+	fi
+    done
+    echo "timed out waiting for docker daemon to start"
+    exit 1
+}
+
 case "$1" in
     pull)
 	docker pull "opengrok/docker:${opengrok_version}"
@@ -36,7 +50,9 @@ case "$1" in
 	;;
     start|run)
 	[ ! -f "${opengrok_etc}/mirror.yml" ] && touch "${opengrok_etc}/mirror.yml"
+	waitfordockerd
 	docker start opengrok
+	echo "listening on http://${HOSTNAME}:${opengrok_host_app_port}"
 	;;
     stop)
 	docker stop opengrok
