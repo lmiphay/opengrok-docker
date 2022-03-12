@@ -61,7 +61,7 @@ case "$1" in
 	docker rm opengrok
 	;;
     logs)
-	docker logs -f opengrok
+	docker logs -n 1000 -f opengrok 2>&1
 	;;
     reindex)
 	curl http://localhost:${opengrok_host_reindex_port}/reindex
