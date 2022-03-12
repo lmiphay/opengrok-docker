@@ -1,6 +1,6 @@
 # opengrok-docker
 
-Driver program to manage a containerised opengrok appliance
+Driver program to manage a containerised opengrok appliance.
 
 ## Configuration
 
@@ -27,6 +27,9 @@ $ opengrok-docker stop
 $ opengrok-docker delete
 ```
 
+The pull and create should only be done once per version bump.
+After that the container can be started and stopped as required.
+
 ## Upgrade
 
 1. opengrok-docker stop
@@ -34,6 +37,35 @@ $ opengrok-docker delete
 3. docker rename opengrok opengrok-1.7.17
 4. opengrok-docker create
 5. opengrok-docker start
+
+Optional - to remove an old container and/or image:
+
+6. docker rm opengrok-1.7.17
+7. docker rmi opengrok/docker:1.7.17
+
+## OpenRC
+
+To have the container start automatically:
+
+```
+rc-config add opengrok
+```
+
+## Logging
+
+The default docker "json-file" logging driver does *not* do log rotation.
+
+To select the "local" driver, with a max file size of 10MB and four files, add this to `/etc/docker/daemon.json`:
+
+```json
+{
+  "log-driver": "local",
+  "log-opts": {
+    "max-size": "10m",
+    "max-file": "4"
+  }
+}
+```
 
 ## References
 
